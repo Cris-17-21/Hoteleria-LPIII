@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientoInventario;
-import com.alexander.sistema_cerro_verde_backend.service.compras.IMovimientosInventarioService;
+import com.alexander.sistema_cerro_verde_backend.service.compras.IMovimientoInventarioService;
 
 @RestController
 @RequestMapping("/cerro-verde")
 @CrossOrigin("*")
 public class MovimientosInventarioController {
     @Autowired
-    private IMovimientosInventarioService serviceMovimientosInventario;
+    private IMovimientoInventarioService serviceMovimientosInventario;
     @GetMapping("/movimientosinventario")
     public List<MovimientoInventario> buscarTodos() {
         return serviceMovimientosInventario.buscarTodos(); //findAll

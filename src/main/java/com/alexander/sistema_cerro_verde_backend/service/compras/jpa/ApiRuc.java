@@ -1,4 +1,4 @@
-package com.alexander.sistema_cerro_verde_backend.service.compras;
+package com.alexander.sistema_cerro_verde_backend.service.compras.jpa;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -6,11 +6,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ApiService {
+public class ApiRuc {
     WebClient web = WebClient.create();
     private final String TOKEN = "apis-token-14620.8grrglwKnM2Mrk29QMdUKuzrcUmeHHSq";
 
-    public ApiService(WebClient.Builder webClientBuilder) {
+    public ApiRuc(WebClient.Builder webClientBuilder) {
         this.web = webClientBuilder
             .baseUrl("https://api.apis.net.pe/v2")
             .build();

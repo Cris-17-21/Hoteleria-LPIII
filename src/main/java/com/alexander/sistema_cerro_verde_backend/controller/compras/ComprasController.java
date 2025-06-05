@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.Compra;
-import com.alexander.sistema_cerro_verde_backend.service.compras.IComprasService;
+import com.alexander.sistema_cerro_verde_backend.service.compras.ICompraService;
 
 @RestController
 @RequestMapping("/api")
@@ -27,7 +27,7 @@ import com.alexander.sistema_cerro_verde_backend.service.compras.IComprasService
 public class ComprasController {
 
     @Autowired
-    private IComprasService serviceCompras;
+    private ICompraService serviceCompras;
 
     @GetMapping("/compras")
     public List<Compra> buscarTodos() {

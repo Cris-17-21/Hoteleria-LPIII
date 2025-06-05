@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedor;
-import com.alexander.sistema_cerro_verde_backend.service.compras.ApiService;
-import com.alexander.sistema_cerro_verde_backend.service.compras.jpa.ProveedoresService;
+import com.alexander.sistema_cerro_verde_backend.service.compras.jpa.ApiRuc;
+import com.alexander.sistema_cerro_verde_backend.service.compras.jpa.ProveedorService;
 
 @RestController
 @RequestMapping("/api")
@@ -28,9 +28,9 @@ import com.alexander.sistema_cerro_verde_backend.service.compras.jpa.Proveedores
 public class ProveedoresController {
 
     @Autowired
-    private ProveedoresService serviceProveedores;
+    private ProveedorService serviceProveedores;
     @Autowired
-    private ApiService api;
+    private ApiRuc api;
 
     @GetMapping("/proveedores")
     public List<Proveedor> buscarTodos() { //Listar todos los proveedores

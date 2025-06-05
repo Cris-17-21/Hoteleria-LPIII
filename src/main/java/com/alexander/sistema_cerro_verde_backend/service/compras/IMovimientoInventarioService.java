@@ -5,14 +5,15 @@ import java.util.Optional;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientoInventario;
 
-public interface IMovimientosInventarioService {
+public interface IMovimientoInventarioService {
+
     List<MovimientoInventario> buscarTodos();
-    //Método para listar todos los registros
+
     void guardar(MovimientoInventario movimientoinventario);
 
     void modificar(MovimientoInventario movimientoinventario);
 
-    Optional<MovimientoInventario> buscarId(Integer id_movimiento_inventario);
+    Optional<MovimientoInventario> buscarId(Integer idMovimientoInventario);
 
-    void eliminar(Integer id_movimiento_inventario);
+    void eliminar(Integer idMovimientoInventario);
 }

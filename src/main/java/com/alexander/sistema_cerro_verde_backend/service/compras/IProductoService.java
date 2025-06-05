@@ -5,16 +5,15 @@ import java.util.Optional;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.Producto;
 
-public interface IProductosService {
+public interface IProductoService {
+
     List<Producto> buscarTodos(); //Buscar todos los Productos
- 
-    List<Producto> buscarActivos(); //Buscas los productos activos, estado = 1
 
     void guardar(Producto producto); //Guardar producto
 
     void modificar(Producto producto); //Modificar producto
 
-    Optional<Producto> buscarId(Integer id_producto); //Buscar el producto por Id
+    Optional<Producto> buscarId(Integer idProducto); //Buscar el producto por Id
 
-    void eliminar(Integer id_producto); //Eliminar producto, estado = 0
+    void eliminar(Integer idProducto); //Eliminar producto, estado = 0
 }

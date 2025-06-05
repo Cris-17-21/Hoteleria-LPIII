@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexander.sistema_cerro_verde_backend.service.compras.IDetallesCompraService;
+import com.alexander.sistema_cerro_verde_backend.service.compras.IDetalleCompraService;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
 public class DetallesCompraController {
     @Autowired
-    private IDetallesCompraService serviceDetallesCompra;
+    private IDetalleCompraService serviceDetallesCompra;
     @DeleteMapping("/detallescompra/{id}")
     public void eliminar(@PathVariable("id") Integer idCompra){
         serviceDetallesCompra.eliminarDetalleCompra(idCompra);

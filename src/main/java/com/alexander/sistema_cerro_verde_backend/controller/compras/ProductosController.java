@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.Producto;
-import com.alexander.sistema_cerro_verde_backend.service.compras.IProductosService;
+import com.alexander.sistema_cerro_verde_backend.service.compras.IProductoService;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
 public class ProductosController {
     @Autowired
-    private IProductosService serviceProductos;
+    private IProductoService serviceProductos;
 
     @GetMapping("/productos")
     public List<Producto> buscarTodos(){

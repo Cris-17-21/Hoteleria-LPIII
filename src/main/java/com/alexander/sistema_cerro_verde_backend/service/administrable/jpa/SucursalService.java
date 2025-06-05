@@ -5,44 +5,38 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.alexander.sistema_cerro_verde_backend.entity.administrable.Sucursal;
 import com.alexander.sistema_cerro_verde_backend.repository.administrable.SucursalRepository;
-import com.alexander.sistema_cerro_verde_backend.service.administrable.SucursalesService;
+import com.alexander.sistema_cerro_verde_backend.service.administrable.ISucursalService;
 
 @Service
-public class SucursalesServicesImpl implements SucursalesService {
+public class SucursalService implements ISucursalService {
     @Autowired
-    private SucursalRepository repository;
+    private SucursalRepository repoSucursal;
 
     @Override
-    @Transactional(readOnly = true)
     public List<Sucursal> buscarTodos() {
-        return repository.findAll();
+        return repoSucursal.findAll();
     }
 
     @Override
-    @Transactional
     public Sucursal guardar(Sucursal sucursal) {
-        return repository.save(sucursal);
+        return repoSucursal.save(sucursal);
     }
 
     @Override
     public void modificar(Sucursal sucursal) {
-        repository.save(sucursal);
+        repoSucursal.save(sucursal);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<Sucursal> buscarId(Integer id) {
-        return repository.findById(id);
+        return repoSucursal.findById(id);
     }
 
     @Override
-    @Transactional
     public void eliminar(Integer id) {
-        repository.deleteById(id);
+        repoSucursal.deleteById(id);
     }
-
 }

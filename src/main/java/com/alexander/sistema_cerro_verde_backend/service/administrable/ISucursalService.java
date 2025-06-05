@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.alexander.sistema_cerro_verde_backend.entity.administrable.Sucursal;
 
-public interface SucursalesService {
+public interface ISucursalService {
 
     List<Sucursal> buscarTodos();
     

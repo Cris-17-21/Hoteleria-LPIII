@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.Categoria;
-import com.alexander.sistema_cerro_verde_backend.service.compras.jpa.CategoriasProductosService;
+import com.alexander.sistema_cerro_verde_backend.service.compras.jpa.CategoriaService;
 
 
 @RestController
@@ -27,7 +27,7 @@ import com.alexander.sistema_cerro_verde_backend.service.compras.jpa.CategoriasP
 public class CategoriasProductosController {
 
     @Autowired
-    private CategoriasProductosService serviceCategoriasProductos;
+    private CategoriaService serviceCategoriasProductos;
 
     @GetMapping("/categoriasproductos")
     public List<Categoria> buscarTodos(){

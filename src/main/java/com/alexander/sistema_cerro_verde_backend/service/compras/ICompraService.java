@@ -5,16 +5,15 @@ import java.util.Optional;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.Compra;
 
-public interface IComprasService {
+public interface ICompraService {
+
     List<Compra> buscarTodos();
-    //Método para listar todos los registros 
+
     void guardar(Compra compra);
 
     void modificar(Compra compra);
 
-    Optional<Compra> buscarId(Integer id_compra);
+    Optional<Compra> buscarId(Integer idCompra);
 
-    void eliminar(Integer id_compra);
-
-    String obtenerProximoCorrelativo();
+    void eliminar(Integer idCompra);
 }
