@@ -10,10 +10,10 @@ import com.alexander.sistema_cerro_verde_backend.entity.compras.Compra;
 import com.alexander.sistema_cerro_verde_backend.entity.compras.DetalleCompra;
 import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientoInventario;
 import com.alexander.sistema_cerro_verde_backend.entity.compras.Producto;
-import com.alexander.sistema_cerro_verde_backend.repository.compras.ComprasRepository;
-import com.alexander.sistema_cerro_verde_backend.repository.compras.DetallesCompraRepository;
-import com.alexander.sistema_cerro_verde_backend.repository.compras.MovimientosInventarioRepository;
-import com.alexander.sistema_cerro_verde_backend.repository.compras.ProductosRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.compras.CompraRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.compras.DetalleCompraRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.compras.MovimientoInventarioRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.compras.ProductoRepository;
 import com.alexander.sistema_cerro_verde_backend.service.compras.IComprasService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -23,16 +23,16 @@ import jakarta.transaction.Transactional;
 public class ComprasService implements IComprasService {
 
     @Autowired
-    private ComprasRepository repoCompras;
+    private CompraRepository repoCompras;
 
     @Autowired
-    private ProductosRepository repoProductos;
+    private ProductoRepository repoProductos;
 
     @Autowired
-    private DetallesCompraRepository repoDetalle;
+    private DetalleCompraRepository repoDetalle;
 
     @Autowired
-    private MovimientosInventarioRepository repoMovimientosInventario;
+    private MovimientoInventarioRepository repoMovimientosInventario;
 
     @Override
     public List<Compra> buscarTodos() {

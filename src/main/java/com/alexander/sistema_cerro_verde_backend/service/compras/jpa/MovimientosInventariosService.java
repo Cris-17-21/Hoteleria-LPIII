@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientoInventario;
-import com.alexander.sistema_cerro_verde_backend.repository.compras.MovimientosInventarioRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.compras.MovimientoInventarioRepository;
 import com.alexander.sistema_cerro_verde_backend.service.compras.IMovimientosInventarioService;
 
 @Service
 public class MovimientosInventariosService implements IMovimientosInventarioService{
     @Autowired
-    private MovimientosInventarioRepository repoMovimientosInventario;
+    private MovimientoInventarioRepository repoMovimientosInventario;
     public List<MovimientoInventario> buscarTodos(){
         return repoMovimientosInventario.findAll();
     }

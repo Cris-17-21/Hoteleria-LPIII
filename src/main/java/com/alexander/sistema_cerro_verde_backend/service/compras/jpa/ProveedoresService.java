@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedor;
-import com.alexander.sistema_cerro_verde_backend.repository.compras.ProveedoresRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.compras.ProveedorRepository;
 import com.alexander.sistema_cerro_verde_backend.service.compras.IProveedoresService;
 
 import jakarta.persistence.EntityManager;
@@ -20,7 +20,7 @@ public class ProveedoresService implements IProveedoresService {
     private EntityManager entityManager;
 
     @Autowired
-    private ProveedoresRepository repoProveedores;
+    private ProveedorRepository repoProveedores;
 
     @Override
     public List<Proveedor> buscarTodos() { //Buscar todos los proveedores

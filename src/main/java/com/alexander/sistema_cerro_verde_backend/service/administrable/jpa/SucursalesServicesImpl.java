@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alexander.sistema_cerro_verde_backend.entity.administrable.Sucursal;
-import com.alexander.sistema_cerro_verde_backend.repository.administrable.SucursalesRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.administrable.SucursalRepository;
 import com.alexander.sistema_cerro_verde_backend.service.administrable.SucursalesService;
 
 @Service
 public class SucursalesServicesImpl implements SucursalesService {
     @Autowired
-    private SucursalesRepository repository;
+    private SucursalRepository repository;
 
     @Override
     @Transactional(readOnly = true)

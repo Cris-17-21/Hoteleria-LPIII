@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.Categoria;
-import com.alexander.sistema_cerro_verde_backend.repository.compras.CategoriasProductosRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.compras.CategoriaRepository;
 import com.alexander.sistema_cerro_verde_backend.service.compras.ICategoriasProductosService;
 
 import jakarta.persistence.EntityManager;
@@ -20,7 +20,7 @@ public class CategoriasProductosService implements ICategoriasProductosService{
     private EntityManager entityManager;
 
     @Autowired
-    private CategoriasProductosRepository repoCategoriasProductos;
+    private CategoriaRepository repoCategoriasProductos;
 
     @Override
     public List<Categoria> buscarTodos(){ //Buscar todas las categorias

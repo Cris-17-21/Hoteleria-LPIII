@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientoInventario;
 
-public interface MovimientosInventarioRepository extends JpaRepository<MovimientoInventario, Integer> {
+public interface MovimientoInventarioRepository extends JpaRepository<MovimientoInventario, Integer> {
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springfsramework.stereotype.Service;
 
 import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientoInventario;
 import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaXProducto;
@@ -13,11 +13,11 @@ import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaXHabitacion;
 import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaXSalon;
 import com.alexander.sistema_cerro_verde_backend.entity.ventas.Venta;
 import com.alexander.sistema_cerro_verde_backend.repository.caja.CajasRepository;
-import com.alexander.sistema_cerro_verde_backend.repository.compras.MovimientosInventarioRepository;
-import com.alexander.sistema_cerro_verde_backend.repository.compras.ProductosRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.compras.MovimientoInventarioRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.compras.ProductoRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.recepcion.HabitacionesRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.recepcion.ReservasRepository;
-import com.alexander.sistema_cerro_verde_backend.repository.ventas.ClientesRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.ventas.ClienteRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.ventas.DetalleVentaRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.ventas.MetodoPagoRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.ventas.VentaHabitacionRepository;
@@ -38,16 +38,16 @@ public class VentaService implements IVentaService {
     private HabitacionesRepository repoHabitacion;
 
     @Autowired
-    private ClientesRepository clienteRepository;
+    private ClienteRepository clienteRepository;
 
     @Autowired
-    private ProductosRepository repoProductos;
+    private ProductoRepository repoProductos;
 
     @Autowired
     private ReservasRepository repoReservas;
 
     @Autowired
-    private MovimientosInventarioRepository repoMovimientosInventario;
+    private MovimientoInventarioRepository repoMovimientosInventario;
 
     @Autowired
     private MetodoPagoRepository repoMetodo;

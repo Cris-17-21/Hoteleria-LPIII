@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.alexander.sistema_cerro_verde_backend.entity.ventas.Cliente;
 import com.alexander.sistema_cerro_verde_backend.repository.recepcion.ReservasRepository;
-import com.alexander.sistema_cerro_verde_backend.repository.ventas.ClientesRepository;
+import com.alexander.sistema_cerro_verde_backend.repository.ventas.ClienteRepository;
 import com.alexander.sistema_cerro_verde_backend.service.ventas.ClientesService;
 
 import jakarta.persistence.EntityManager;
@@ -21,7 +21,7 @@ public class ClientesServiceImpl implements ClientesService{
     private EntityManager entityManager;
 
     @Autowired
-    private ClientesRepository repoClientes;
+    private ClienteRepository repoClientes;
 
     @Autowired
     private ReservasRepository repoReservas;
