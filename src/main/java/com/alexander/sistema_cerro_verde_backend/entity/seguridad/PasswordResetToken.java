@@ -23,7 +23,7 @@ public class PasswordResetToken {
 
     @OneToOne
     @JoinColumn(name = "id_usaurio", nullable = false)
-    private Usuarios usuario;
+    private Usuario usuario;
 
     @Column(nullable = false, name="expiry_date")
     private LocalDateTime expiryDate;
@@ -44,11 +44,11 @@ public class PasswordResetToken {
         this.token = token;
     }
 
-    public Usuarios getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

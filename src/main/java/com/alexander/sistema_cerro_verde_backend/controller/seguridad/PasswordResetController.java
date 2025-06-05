@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RestController;
 
 import com.alexander.sistema_cerro_verde_backend.entity.seguridad.PasswordResetToken;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 import com.alexander.sistema_cerro_verde_backend.repository.seguridad.PasswordResetTokenRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.seguridad.UsuariosRepository;
 import com.alexander.sistema_cerro_verde_backend.service.seguridad.jpa.PasswordResetService;
@@ -44,7 +44,7 @@ public class PasswordResetController {
             return ResponseEntity.badRequest().body("Token inválido o expirado");
         }
     
-        Usuarios usuario = resetToken.getUsuario();
+        Usuario usuario = resetToken.getUsuario();
         usuario.setPassword(new BCryptPasswordEncoder().encode(nuevaClave));
         usuarioRepository.save(usuario);
         tokenRepository.delete(resetToken);

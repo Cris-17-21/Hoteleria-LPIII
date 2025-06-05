@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.alexander.sistema_cerro_verde_backend.entity.seguridad.PasswordResetToken;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 import com.alexander.sistema_cerro_verde_backend.repository.seguridad.PasswordResetTokenRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.seguridad.UsuariosRepository;
 import com.alexander.sistema_cerro_verde_backend.service.seguridad.IPasswordResetService;
@@ -30,10 +30,10 @@ public class PasswordResetService implements IPasswordResetService {
     public void enviarLinkRecuperacion(String email) {
     System.out.println("Intentando enviar correo a: " + email);
 
-    Optional<Usuarios> usuarioOpt = usuarioRepository.findByEmail(email);
+    Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(email);
 
     if (usuarioOpt.isPresent()) {
-        Usuarios usuario = usuarioOpt.get();
+        Usuario usuario = usuarioOpt.get();
         String token = UUID.randomUUID().toString();
 
         PasswordResetToken resetToken = new PasswordResetToken();

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientosInventario;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientoInventario;
 import com.alexander.sistema_cerro_verde_backend.service.compras.IMovimientosInventarioService;
 
 @RestController
@@ -24,21 +24,21 @@ public class MovimientosInventarioController {
     @Autowired
     private IMovimientosInventarioService serviceMovimientosInventario;
     @GetMapping("/movimientosinventario")
-    public List<MovimientosInventario> buscarTodos() {
+    public List<MovimientoInventario> buscarTodos() {
         return serviceMovimientosInventario.buscarTodos(); //findAll
     }
     @PostMapping("/movimientosinventario")
-    public MovimientosInventario guardar(@RequestBody MovimientosInventario movimientoinventario) {
+    public MovimientoInventario guardar(@RequestBody MovimientoInventario movimientoinventario) {
         serviceMovimientosInventario.guardar(movimientoinventario);
         return movimientoinventario;
     }
     @PutMapping("/movimientosinventario")
-    public MovimientosInventario modificar(@RequestBody MovimientosInventario movimientoinventario) {
+    public MovimientoInventario modificar(@RequestBody MovimientoInventario movimientoinventario) {
         serviceMovimientosInventario.modificar(movimientoinventario);
         return movimientoinventario;
     }
     @GetMapping("/movimientosinventario/{id}")
-    public Optional<MovimientosInventario> buscarId(@PathVariable("id") Integer id_movimiento_inventario) {
+    public Optional<MovimientoInventario> buscarId(@PathVariable("id") Integer id_movimiento_inventario) {
         return serviceMovimientosInventario.buscarId(id_movimiento_inventario);
     }
     @DeleteMapping("/movimientosinventario/{id}")

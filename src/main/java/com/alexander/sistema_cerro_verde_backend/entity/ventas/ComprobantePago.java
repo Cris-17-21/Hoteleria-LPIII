@@ -1,6 +1,7 @@
 package com.alexander.sistema_cerro_verde_backend.entity.ventas;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,7 +11,9 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="comprobante_pago")
+@Table(name="comprobantes_pago")
+@SQLDelete(sql = "UPDATE comprobantes_pago SET estado = 0 WHERE id_venta = ?")
+@SQLRestriction("estado =  1")
 public class ComprobantePago {
     @Id
     private Integer idVenta;
@@ -19,45 +22,13 @@ public class ComprobantePago {
     private String pdfUrl;
     private String numComprobante;
     private String fechaEmision;
+    private Integer estado = 1;
 
     //Relación de Uno a Uno con Venta
     @OneToOne
     @MapsId
     @JoinColumn(name="id_venta")
-    @JsonIgnore
-    private Ventas venta;
-
-    public String getPdfUrl() {
-        return pdfUrl;
-    }
-
-    public void setPdfUrl(String pdfUrl) {
-        this.pdfUrl = pdfUrl;
-    }
-
-    public String getNumComprobante() {
-        return numComprobante;
-    }
-
-    public void setNumComprobante(String numComprobante) {
-        this.numComprobante = numComprobante;
-    }
-
-    public String getFechaEmision() {
-        return fechaEmision;
-    }
-
-    public void setFechaEmision(String fechaEmision) {
-        this.fechaEmision = fechaEmision;
-    }
-
-    public Ventas getVenta() {
-        return venta;
-    }
-
-    public void setVenta(Ventas venta) {
-        this.venta = venta;
-    }
+    private Venta venta;
 
     public Integer getIdVenta() {
         return idVenta;
@@ -83,4 +54,50 @@ public class ComprobantePago {
         this.numSerieFactura = numSerieFactura;
     }
 
+    public String getPdfUrl() {
+        return pdfUrl;
+    }
+
+    public void setPdfUrl(String pdfUrl) {
+        this.pdfUrl = pdfUrl;
+    }
+
+    public String getNumComprobante() {
+        return numComprobante;
+    }
+
+    public void setNumComprobante(String numComprobante) {
+        this.numComprobante = numComprobante;
+    }
+
+    public String getFechaEmision() {
+        return fechaEmision;
+    }
+
+    public void setFechaEmision(String fechaEmision) {
+        this.fechaEmision = fechaEmision;
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
+
+    @Override
+    public String toString() {
+        return "ComprobantePago [idVenta=" + idVenta + ", numSerieBoleta=" + numSerieBoleta + ", numSerieFactura="
+                + numSerieFactura + ", pdfUrl=" + pdfUrl + ", numComprobante=" + numComprobante + ", fechaEmision="
+                + fechaEmision + ", estado=" + estado + ", venta=" + venta + "]";
+    }
 }

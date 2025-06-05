@@ -9,10 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.alexander.sistema_cerro_verde_backend.entity.mantenimiento.Incidencias;
 import com.alexander.sistema_cerro_verde_backend.entity.mantenimiento.Limpiezas;
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.Ventas;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.Venta;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,10 +24,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuarios implements UserDetails {
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_usuario")
     private Integer idUsuario;
     private String username;
     private String password;
@@ -47,7 +45,7 @@ public class Usuarios implements UserDetails {
     //Relación de Uno a Muchos con Ventas
     @OneToMany(mappedBy="usuario")
     @JsonIgnore
-    private List<Ventas> venta;
+    private List<Venta> venta;
 
     @OneToMany(mappedBy = "usuario")
     private List<Incidencias> incidencias;
@@ -63,9 +61,6 @@ public class Usuarios implements UserDetails {
         return authorities;
     }
 
-
-
-    
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -168,11 +163,11 @@ public class Usuarios implements UserDetails {
         return this.username;
     }
 
-    public List<Ventas> getVenta() {
+    public List<Venta> getVenta() {
         return venta;
     }
 
-    public void setVenta(List<Ventas> venta) {
+    public void setVenta(List<Venta> venta) {
         this.venta = venta;
     }
 

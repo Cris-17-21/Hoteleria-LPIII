@@ -3,8 +3,8 @@ package com.alexander.sistema_cerro_verde_backend.entity.recepcion;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.Clientes;
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentasXReservas;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.Cliente;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaXReserva;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -33,7 +33,7 @@ public class Reservas {
 
     @ManyToOne
     @JoinColumn(name="id_cliente")
-    private Clientes cliente;
+    private Cliente cliente;
 
     @OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
     private List<HabitacionesXReserva> habitacionesXReserva;
@@ -44,7 +44,7 @@ public class Reservas {
 
     @OneToMany(mappedBy="reserva", cascade=CascadeType.ALL)
     @JsonIgnore
-    private List<VentasXReservas> ventaXReserva;
+    private List<VentaXReserva> ventaXReserva;
 
 
     public Integer getId_reserva() {
@@ -95,11 +95,11 @@ public class Reservas {
         this.estado = estado;
     }
 
-    public Clientes getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Clientes cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -127,11 +127,11 @@ public class Reservas {
         this.salonesXReserva = salonesXReserva;
     }
 
-    public List<VentasXReservas> getVentaXReserva() {
+    public List<VentaXReserva> getVentaXReserva() {
         return ventaXReserva;
     }
 
-    public void setVentaXReserva(List<VentasXReservas> ventaXReserva) {
+    public void setVentaXReserva(List<VentaXReserva> ventaXReserva) {
         this.ventaXReserva = ventaXReserva;
     }
     

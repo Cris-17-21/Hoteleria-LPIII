@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alexander.sistema_cerro_verde_backend.entity.caja.Cajas;
 import com.alexander.sistema_cerro_verde_backend.entity.caja.TransaccionesCaja;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 import com.alexander.sistema_cerro_verde_backend.repository.seguridad.UsuariosRepository;
 import com.alexander.sistema_cerro_verde_backend.service.caja.CajasService;
 import com.alexander.sistema_cerro_verde_backend.service.caja.TransaccionesCajaService;
@@ -38,7 +38,7 @@ public class TransaccionesCajaController {
     @Autowired
     private UsuariosRepository usuarioRepository;
 
-    private Usuarios getUsuarioAutenticado() {
+    private Usuario getUsuarioAutenticado() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         return usuarioRepository.findByUsername(username);
@@ -46,7 +46,7 @@ public class TransaccionesCajaController {
 
     @PostMapping("/guardar")
     public ResponseEntity<String> guardarTransaccion(@RequestBody TransaccionesCaja transaccion) {
-        Usuarios usuarios = getUsuarioAutenticado();
+        Usuario usuarios = getUsuarioAutenticado();
         try {
             Optional<Cajas> cajaAbierta = serviceCaja.buscarCajaAperturadaPorUsuario(usuarios);
             if (cajaAbierta.isEmpty()) {
@@ -92,7 +92,7 @@ public class TransaccionesCajaController {
     }
 
     @GetMapping("/usuario")
-    public ResponseEntity<List<TransaccionesCaja>> obtenerTodosPorUsuario(@PathVariable Usuarios usuario) {
+    public ResponseEntity<List<TransaccionesCaja>> obtenerTodosPorUsuario(@PathVariable Usuario usuario) {
         Optional<Cajas> cajaOpt = serviceCaja.buscarCajaPorUsuario(usuario);
         Cajas caja = cajaOpt.get();
         return ResponseEntity.ok(transaccionesCajaService.buscarPorCaja(caja));
@@ -100,7 +100,7 @@ public class TransaccionesCajaController {
 
     @GetMapping
     public ResponseEntity<?> obtenerTransaccionesCajaActual() {
-        Usuarios usuario = getUsuarioAutenticado();
+        Usuario usuario = getUsuarioAutenticado();
         Optional<Cajas> cajaActual = serviceCaja.buscarCajaPorUsuario(usuario);
 
         if (cajaActual.isEmpty()) {

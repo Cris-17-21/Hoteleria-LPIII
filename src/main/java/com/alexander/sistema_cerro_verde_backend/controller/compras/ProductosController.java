@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.Productos;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Producto;
 import com.alexander.sistema_cerro_verde_backend.service.compras.IProductosService;
 
 @RestController
@@ -28,29 +28,29 @@ public class ProductosController {
     private IProductosService serviceProductos;
 
     @GetMapping("/productos")
-    public List<Productos> buscarTodos(){
+    public List<Producto> buscarTodos(){
         return serviceProductos.buscarTodos();
     }
 
     @GetMapping("/productosactivos")
-    public List<Productos> buscarActivos(){
+    public List<Producto> buscarActivos(){
         return serviceProductos.buscarActivos();
     }
 
     @PostMapping("/productos")
-    public Productos guardar(@RequestBody Productos producto) {
+    public Producto guardar(@RequestBody Producto producto) {
         serviceProductos.guardar(producto);
         return producto;
     }
 
     @PutMapping("/productos")
-    public Productos modificar(@RequestBody Productos producto) {
+    public Producto modificar(@RequestBody Producto producto) {
         serviceProductos.modificar(producto);
         return producto;
     }
 
     @GetMapping("/productos/{id}")
-    public Optional<Productos> buscarId(@PathVariable("id") Integer id_producto) {
+    public Optional<Producto> buscarId(@PathVariable("id") Integer id_producto) {
         return serviceProductos.buscarId(id_producto);
     }
 

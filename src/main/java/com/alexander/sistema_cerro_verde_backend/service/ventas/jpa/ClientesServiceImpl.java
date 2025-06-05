@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.Clientes;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.Cliente;
 import com.alexander.sistema_cerro_verde_backend.repository.recepcion.ReservasRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.ventas.ClientesRepository;
 import com.alexander.sistema_cerro_verde_backend.service.ventas.ClientesService;
@@ -27,26 +27,26 @@ public class ClientesServiceImpl implements ClientesService{
     private ReservasRepository repoReservas;
 
     @Override
-    public List<Clientes> buscarTodos() {
+    public List<Cliente> buscarTodos() {
         return repoClientes.findAll();
     }
 
     @Override
-    public List<Clientes> buscarActivos(){
+    public List<Cliente> buscarActivos(){
         return repoClientes.findActive();
     }
 
     @Override
-    public Optional<Clientes> buscarPorId(Integer id){
+    public Optional<Cliente> buscarPorId(Integer id){
         return repoClientes.findById(id);
     }
 
     @Override
     @Transactional
-    public void guardar(Clientes cliente){
-        Optional<Clientes> existente = repoClientes.findByDniRucIgnoreCase(cliente.getDniRuc());
+    public void guardar(Cliente cliente){
+        Optional<Cliente> existente = repoClientes.findByDniRucIgnoreCase(cliente.getDniRuc());
         if(existente.isPresent()){
-            Clientes c = existente.get();
+            Cliente c = existente.get();
             if(c.getEstado() == 0){
                 System.out.println(c.getDniRuc());
                 c.setEstado(1);
@@ -65,7 +65,7 @@ public class ClientesServiceImpl implements ClientesService{
     }
 
     @Override
-    public void modificar(Clientes cliente){
+    public void modificar(Cliente cliente){
         repoClientes.save(cliente);
     }
 

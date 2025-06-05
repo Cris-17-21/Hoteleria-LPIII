@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.Compras;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Compra;
 import com.alexander.sistema_cerro_verde_backend.service.compras.IComprasService;
 
 @RestController
@@ -30,24 +30,24 @@ public class ComprasController {
     private IComprasService serviceCompras;
 
     @GetMapping("/compras")
-    public List<Compras> buscarTodos() {
+    public List<Compra> buscarTodos() {
         return serviceCompras.buscarTodos(); //findAll
     }
 
     @PostMapping("/compras")
-    public Compras guardar(@RequestBody Compras compra) {
+    public Compra guardar(@RequestBody Compra compra) {
         serviceCompras.guardar(compra);
         return compra;
     }
 
     @PutMapping("/compras")
-    public Compras modificar(@RequestBody Compras compra) {
+    public Compra modificar(@RequestBody Compra compra) {
         serviceCompras.modificar(compra);
         return compra;
     }
 
     @GetMapping("/compras/{id}")
-    public Optional<Compras> buscarId(@PathVariable("id") Integer id_compra) {
+    public Optional<Compra> buscarId(@PathVariable("id") Integer id_compra) {
         return serviceCompras.buscarId(id_compra);
     }
 

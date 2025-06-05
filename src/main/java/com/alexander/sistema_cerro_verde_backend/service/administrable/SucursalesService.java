@@ -3,17 +3,17 @@ package com.alexander.sistema_cerro_verde_backend.service.administrable;
 import java.util.List;
 import java.util.Optional;
 
-import com.alexander.sistema_cerro_verde_backend.entity.Sucursales;
+import com.alexander.sistema_cerro_verde_backend.entity.administrable.Sucursal;
 
 public interface SucursalesService {
 
-    List<Sucursales> buscarTodos();
+    List<Sucursal> buscarTodos();
     
-    Sucursales guardar(Sucursales sucursal);
+    Sucursal guardar(Sucursal sucursal);
 
-    Optional<Sucursales> buscarId(Integer id);
+    Optional<Sucursal> buscarId(Integer id);
 
-    void modificar(Sucursales sucursal);
+    void modificar(Sucursal sucursal);
 
     void eliminar(Integer id);
 }

@@ -2,8 +2,8 @@ package com.alexander.sistema_cerro_verde_backend.entity.caja;
 
 import java.util.Date;
 
-import com.alexander.sistema_cerro_verde_backend.entity.Sucursales;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.administrable.Sucursal;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,15 +38,15 @@ public class Cajas {
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
-    private Usuarios usuario;
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario_cierre")
-    private Usuarios usuarioCierre;
+    private Usuario usuarioCierre;
 
     @ManyToOne
     @JoinColumn(name = "id_sucursal")
-    private Sucursales sucursal;
+    private Sucursal sucursal;
 
     private Integer estado = 1;
 
@@ -98,19 +98,19 @@ public class Cajas {
         this.estadoCaja = estadoCaja;
     }
 
-    public Usuarios getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public Sucursales getSucursal() {
+    public Sucursal getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursales sucursal) {
+    public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
     }
 
@@ -138,11 +138,11 @@ public class Cajas {
         this.saldoTotal = saldoTotal;
     }
 
-    public Usuarios getUsuarioCierre() {
+    public Usuario getUsuarioCierre() {
         return usuarioCierre;
     }
 
-    public void setUsuarioCierre(Usuarios usuarioCierre) {
+    public void setUsuarioCierre(Usuario usuarioCierre) {
         this.usuarioCierre = usuarioCierre;
     }
 

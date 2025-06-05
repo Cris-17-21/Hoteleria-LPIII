@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Permisos;
 import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Roles;
 import com.alexander.sistema_cerro_verde_backend.entity.seguridad.RolesPermisos;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 import com.alexander.sistema_cerro_verde_backend.excepciones.CorreoYaRegistradoException;
 import com.alexander.sistema_cerro_verde_backend.excepciones.UsuarioYaRegistradoException;
 import com.alexander.sistema_cerro_verde_backend.repository.seguridad.PermisosRepository;
@@ -42,12 +42,12 @@ public class UsuariosService implements IUsuariosService {
 
  
     @Override
-    public Usuarios obtenerUsuario(String username) {
+    public Usuario obtenerUsuario(String username) {
         return usuariosRepository.findByUsername(username);
     }
    
     @Override
-    public Usuarios obtenerUsuarioPorId(Integer id) throws Exception {
+    public Usuario obtenerUsuarioPorId(Integer id) throws Exception {
         return usuariosRepository.findById(id).orElse(null);
     }
 
@@ -60,8 +60,8 @@ public class UsuariosService implements IUsuariosService {
     }
 
         @Override
-        public Usuarios actualizarUsuario(Usuarios usuario) throws Exception {
-            Usuarios usuarioExistente = usuariosRepository.findById(usuario.getIdUsuario()).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        public Usuario actualizarUsuario(Usuario usuario) throws Exception {
+            Usuario usuarioExistente = usuariosRepository.findById(usuario.getIdUsuario()).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         
             if (usuario.getEmail() != null && !usuario.getEmail().equals(usuarioExistente.getEmail()) &&
                 usuariosRepository.existsByEmail(usuario.getEmail())) {
@@ -81,7 +81,7 @@ public class UsuariosService implements IUsuariosService {
             }
         
             usuario.setRol(rol);
-            Usuarios usuarioGuardado = usuariosRepository.save(usuario);
+            Usuario usuarioGuardado = usuariosRepository.save(usuario);
         
             if (permisosDelJson != null) {
                 Set<RolesPermisos> nuevosPermisos = new HashSet<>();
@@ -106,7 +106,7 @@ public class UsuariosService implements IUsuariosService {
       
 
     @Override
-    public List<Usuarios> obtenerTodosUsuarios() {
+    public List<Usuario> obtenerTodosUsuarios() {
         return usuariosRepository.findAll();
     }
 
@@ -116,9 +116,9 @@ public class UsuariosService implements IUsuariosService {
     }
     @Override
     public void cambiarContraseña(Integer id, String nuevaContraseña) throws Exception {
-        Optional<Usuarios> optional = usuariosRepository.findById(id);
+        Optional<Usuario> optional = usuariosRepository.findById(id);
         if (optional.isPresent()) {
-            Usuarios usuario = optional.get();
+            Usuario usuario = optional.get();
             String contraseñaEncriptada = passwordEncoder.encode(nuevaContraseña);
             usuario.setPassword(contraseñaEncriptada);
             usuariosRepository.save(usuario);
@@ -129,7 +129,7 @@ public class UsuariosService implements IUsuariosService {
     
 
     @Override
-    public Usuarios guardarUsuarioConPermisos(Usuarios usuario) throws Exception {
+    public Usuario guardarUsuarioConPermisos(Usuario usuario) throws Exception {
         Integer idRol = usuario.getRol().getId();
         Roles rol = rolesRepository.findById(idRol).orElse(null);
         
@@ -138,7 +138,7 @@ public class UsuariosService implements IUsuariosService {
         }
 
         usuario.setRol(rol);
-        Usuarios usuarioGuardado = usuariosRepository.save(usuario);
+        Usuario usuarioGuardado = usuariosRepository.save(usuario);
         if (usuario.getRol().getRolesPermisos() != null) {
             for (RolesPermisos permiso : usuario.getRol().getRolesPermisos()) {
                 // Asignamos el rol al permiso para asegurarnos
@@ -150,7 +150,7 @@ public class UsuariosService implements IUsuariosService {
     }
 
     @Override
-    public Usuarios guardarUsuario(Usuarios usuario) throws Exception {
+    public Usuario guardarUsuario(Usuario usuario) throws Exception {
         if (usuariosRepository.existsByEmail(usuario.getEmail())) {
             throw new CorreoYaRegistradoException();
         }
@@ -167,7 +167,7 @@ public class UsuariosService implements IUsuariosService {
         }
     
         usuario.setRol(rol);
-        Usuarios usuarioGuardado = usuariosRepository.save(usuario);
+        Usuario usuarioGuardado = usuariosRepository.save(usuario);
     
         if (permisosDelJson != null) {
             Set<RolesPermisos> nuevosPermisos = new HashSet<>();

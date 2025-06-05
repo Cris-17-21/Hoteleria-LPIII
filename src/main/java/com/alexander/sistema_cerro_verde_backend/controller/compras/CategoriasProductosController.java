@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.CategoriasProductos;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Categoria;
 import com.alexander.sistema_cerro_verde_backend.service.compras.jpa.CategoriasProductosService;
 
 
@@ -30,29 +30,29 @@ public class CategoriasProductosController {
     private CategoriasProductosService serviceCategoriasProductos;
 
     @GetMapping("/categoriasproductos")
-    public List<CategoriasProductos> buscarTodos(){
+    public List<Categoria> buscarTodos(){
         return serviceCategoriasProductos.buscarTodos(); //findAll
     }
 
     @GetMapping("/categoriasproductosactivos")
-    public List<CategoriasProductos> buscarActivos() {
+    public List<Categoria> buscarActivos() {
         return serviceCategoriasProductos.buscarActivos();
     }
 
     @PostMapping("/categoriasproductos")
-    public CategoriasProductos guardar (@RequestBody CategoriasProductos categoriaproducto){
+    public Categoria guardar (@RequestBody Categoria categoriaproducto){
         serviceCategoriasProductos.guardar(categoriaproducto);
         return categoriaproducto;
     }
 
     @PutMapping("/categoriasproductos")
-    public CategoriasProductos modificar(@RequestBody CategoriasProductos categoriaproducto) {
+    public Categoria modificar(@RequestBody Categoria categoriaproducto) {
         serviceCategoriasProductos.modificar(categoriaproducto);
         return categoriaproducto;
     }
 
     @GetMapping("/categoriasproductos/{id}")
-    public Optional<CategoriasProductos> buscarId(@PathVariable("id") Integer id_categoria) {
+    public Optional<Categoria> buscarId(@PathVariable("id") Integer id_categoria) {
         return serviceCategoriasProductos.buscarId(id_categoria);
     }
 

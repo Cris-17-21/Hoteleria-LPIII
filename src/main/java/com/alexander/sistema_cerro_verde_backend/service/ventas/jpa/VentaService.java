@@ -7,11 +7,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientosInventario;
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.DetalleVenta;
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaHabitacion;
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaSalon;
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.Ventas;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientoInventario;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaXProducto;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaXHabitacion;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaXSalon;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.Venta;
 import com.alexander.sistema_cerro_verde_backend.repository.caja.CajasRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.compras.MovimientosInventarioRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.compras.ProductosRepository;
@@ -65,24 +65,24 @@ public class VentaService implements IVentaService {
     private VentaSalonRepository repoVentaSalon;
 
     @Override
-    public List<Ventas> buscarTodos() {
+    public List<Venta> buscarTodos() {
         return repoVenta.findAll();
     }
 
     @Override
-    public Optional<Ventas> buscarPorId(Integer id) {
+    public Optional<Venta> buscarPorId(Integer id) {
         return repoVenta.findById(id);
     }
 
     @Override
-    public void guardar(Ventas venta) {
-        Ventas ventaGuardada = repoVenta.save(venta);
+    public void guardar(Venta venta) {
+        Venta ventaGuardada = repoVenta.save(venta);
         // 2) Recorres cada detalle y ajustas el stock
         ventaGuardada.getDetalleVenta().forEach(det -> {
             Integer prodId = det.getProducto().getId_producto();
             var producto = repoProductos.findById(prodId)
                     .orElseThrow(() -> new EntityNotFoundException("Producto no existe: " + prodId));
-            MovimientosInventario movimiento = new MovimientosInventario();
+            MovimientoInventario movimiento = new MovimientoInventario();
             movimiento.setProducto(producto);
             movimiento.setTipo_movimiento("Salida");
             movimiento.setFecha(venta.getFecha());
@@ -118,7 +118,7 @@ public class VentaService implements IVentaService {
     }
 
     @Override
-    public void modificar(Ventas venta) {
+    public void modificar(Venta venta) {
         repoVenta.save(venta);
     }
 
@@ -132,7 +132,7 @@ public class VentaService implements IVentaService {
         String correlativo;
         String tipo;
 
-        Ventas venta = repoVenta.findById(id).orElseThrow();
+        Venta venta = repoVenta.findById(id).orElseThrow();
 
         if (venta.getComprobantePago().getNumComprobante().equals("B001")) {
             correlativo = venta.getComprobantePago().getNumSerieBoleta();
@@ -145,16 +145,16 @@ public class VentaService implements IVentaService {
         StringBuilder filas = new StringBuilder();
 
         // Obtener detalles
-        List<DetalleVenta> productos = repoDetalle.findByVenta_IdVenta(id);
-        List<VentaHabitacion> habitaciones = repoVentaHabitacion.findByVenta_IdVenta(id);
-        List<VentaSalon> salones = repoVentaSalon.findByVenta_IdVenta(id);
+        List<VentaXProducto> productos = repoDetalle.findByVenta_IdVenta(id);
+        List<VentaXHabitacion> habitaciones = repoVentaHabitacion.findByVenta_IdVenta(id);
+        List<VentaXSalon> salones = repoVentaSalon.findByVenta_IdVenta(id);
 
         //Subtotal
         Double subTotal = 0.0;
         Double igv = 0.0;
 
         // Agregamos productos
-        for (DetalleVenta d : productos) {
+        for (VentaXProducto d : productos) {
             subTotal = subTotal + d.getSubTotal();
             filas.append("<tr>")
                     .append("<td>").append(d.getCantidad()).append("</td>")
@@ -165,7 +165,7 @@ public class VentaService implements IVentaService {
         }
 
         // Agregamos habitaciones
-        for (VentaHabitacion h : habitaciones) {
+        for (VentaXHabitacion h : habitaciones) {
             subTotal = subTotal + h.getSubTotal();
             filas.append("<tr>")
                     .append("<td>1</td>")
@@ -179,7 +179,7 @@ public class VentaService implements IVentaService {
         }
 
         // Agregamos salones
-        for (VentaSalon s : salones) {
+        for (VentaXSalon s : salones) {
             subTotal = subTotal + s.getSubTotal();
             filas.append("<tr>")
                     .append("<td>1</td>")

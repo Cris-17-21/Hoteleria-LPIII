@@ -1,24 +1,21 @@
 package com.alexander.sistema_cerro_verde_backend.entity.ventas;
 
-import java.util.List;
-
 import org.hibernate.annotations.SQLDelete;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.SQLRestriction;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="clientes")
-@SQLDelete(sql="UPDATE Clientes SET estado = 0 WHERE id_cliente=?")
-public class Clientes {
+@Table(name = "clientes")
+@SQLDelete(sql = "UPDATE clientes SET estado = 0 WHERE id_cliente = ?")
+@SQLRestriction("estado = 1")
+public class Cliente {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCliente;
     private String dniRuc;
     private String nombre;
@@ -26,13 +23,6 @@ public class Clientes {
     private String correo;
     private String pais;
     private Integer estado = 1;
-
-    //Relación de Uno a Muchos con Reserva
-
-    //Relación de Uno a Muchos con Ventas
-    @OneToMany(mappedBy="cliente")
-    @JsonIgnore
-    private List<Ventas> venta;
 
     public Integer getIdCliente() {
         return idCliente;
@@ -90,11 +80,9 @@ public class Clientes {
         this.estado = estado;
     }
 
-    public List<Ventas> getVenta() {
-        return venta;
-    }
-
-    public void setVenta(List<Ventas> venta) {
-        this.venta = venta;
+    @Override
+    public String toString() {
+        return "Cliente [idCliente=" + idCliente + ", dniRuc=" + dniRuc + ", nombre=" + nombre + ", telefono="
+                + telefono + ", correo=" + correo + ", pais=" + pais + ", estado=" + estado + "]";
     }
 }

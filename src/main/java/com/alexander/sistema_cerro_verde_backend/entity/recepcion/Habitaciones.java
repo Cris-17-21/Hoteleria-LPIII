@@ -2,10 +2,10 @@ package com.alexander.sistema_cerro_verde_backend.entity.recepcion;
 
 import java.util.List;
 
-import com.alexander.sistema_cerro_verde_backend.entity.Sucursales;
+import com.alexander.sistema_cerro_verde_backend.entity.administrable.Sucursal;
 import com.alexander.sistema_cerro_verde_backend.entity.mantenimiento.Incidencias;
 import com.alexander.sistema_cerro_verde_backend.entity.mantenimiento.Limpiezas;
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaHabitacion;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaXHabitacion;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -33,7 +33,7 @@ public class Habitaciones {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_sucursal")
-    private Sucursales sucursal;
+    private Sucursal sucursal;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_tipo_habitacion")
@@ -42,7 +42,7 @@ public class Habitaciones {
     //Relacion de Uno a Muchos con VenntaHabitacion
     @OneToMany(mappedBy="habitacion", cascade=CascadeType.ALL)
     @JsonIgnore
-    private List<VentaHabitacion> ventaHabitacion;
+    private List<VentaXHabitacion> ventaHabitacion;
 
     @OneToMany(mappedBy = "habitacion")
     private List<Incidencias> incidencias;
@@ -85,11 +85,11 @@ public class Habitaciones {
     }
 
 
-    public Sucursales getSucursal() {
+    public Sucursal getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursales sucursal) {
+    public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
     }
 
@@ -109,11 +109,11 @@ public class Habitaciones {
         this.piso = piso;
     }
 
-    public List<VentaHabitacion> getVentaHabitacion() {
+    public List<VentaXHabitacion> getVentaHabitacion() {
         return ventaHabitacion;
     }
 
-    public void setVentaHabitacion(List<VentaHabitacion> ventaHabitacion) {
+    public void setVentaHabitacion(List<VentaXHabitacion> ventaHabitacion) {
         this.ventaHabitacion = ventaHabitacion;
     }
 

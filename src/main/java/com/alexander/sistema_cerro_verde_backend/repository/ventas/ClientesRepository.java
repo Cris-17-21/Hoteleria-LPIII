@@ -6,12 +6,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.Clientes;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.Cliente;
 
-public interface ClientesRepository extends JpaRepository<Clientes, Integer> {
+public interface ClientesRepository extends JpaRepository<Cliente, Integer> {
 
     @Query("SELECT c FROM Clientes c WHERE c.estado = 1")
-    List<Clientes> findActive();
+    List<Cliente> findActive();
 
-    Optional<Clientes> findByDniRucIgnoreCase(String rucDni);
+    Optional<Cliente> findByDniRucIgnoreCase(String rucDni);
 }

@@ -6,11 +6,11 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.CategoriasProductos;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Categoria;
 
-public interface CategoriasProductosRepository extends JpaRepository<CategoriasProductos, Integer> {
+public interface CategoriasProductosRepository extends JpaRepository<Categoria, Integer> {
     @Query("SELECT cp FROM CategoriasProductos cp WHERE cp.estado = 1")
-    List<CategoriasProductos> findActive();
+    List<Categoria> findActive();
 
-    Optional<CategoriasProductos> findByNombreIgnoreCase(String nombre);
+    Optional<Categoria> findByNombreIgnoreCase(String nombre);
 }

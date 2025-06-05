@@ -1,21 +1,24 @@
 package com.alexander.sistema_cerro_verde_backend.entity.compras;
 
-import java.util.List;
-
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.alexander.sistema_cerro_verde_backend.entity.administrable.Empresa;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "unidad_medida")
-@SQLDelete(sql = "UPDATE unidad_medida SET estado = 0 WHERE id_unidad=?")
+@Table(name = "unidades_medidas")
+@SQLDelete(sql = "UPDATE unidades_medidas SET estado = 0 WHERE id_unidad=?")
+@SQLRestriction("estado = 1")
 public class UnidadMedida {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,10 +28,11 @@ public class UnidadMedida {
     private Integer equivalencia;
     private Integer estado = 1;
 
-    //Relación de Uno a muchos con ProductosXUnidad
-    @OneToMany(mappedBy="unidad")
-    @JsonIgnore
-    List<Productos> producto;
+    //Relación de Muchos a Uno con Empresa
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_empresa")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Empresa empresa;
 
     public Integer getIdUnidad() {
         return idUnidad;
@@ -54,14 +58,6 @@ public class UnidadMedida {
         this.abreviatura = abreviatura;
     }
 
-    public Integer getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Integer estado) {
-        this.estado = estado;
-    }
-
     public Integer getEquivalencia() {
         return equivalencia;
     }
@@ -70,11 +66,25 @@ public class UnidadMedida {
         this.equivalencia = equivalencia;
     }
 
-    public List<Productos> getProducto() {
-        return producto;
+    public Integer getEstado() {
+        return estado;
     }
 
-    public void setProducto(List<Productos> producto) {
-        this.producto = producto;
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    @Override
+    public String toString() {
+        return "UnidadMedida [idUnidad=" + idUnidad + ", nombre=" + nombre + ", abreviatura=" + abreviatura
+                + ", equivalencia=" + equivalencia + ", estado=" + estado + ", empresa=" + empresa + "]";
     }
 }

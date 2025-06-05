@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.alexander.sistema_cerro_verde_backend.entity.caja.Cajas;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 
 public interface CajasRepository extends JpaRepository<Cajas, Integer> {
 
@@ -14,8 +14,8 @@ public interface CajasRepository extends JpaRepository<Cajas, Integer> {
 
     List<Cajas> findAllByEstadoCaja(String estadoCaja);
 
-    Optional<Cajas> findByUsuarioAndEstadoCaja(Usuarios usuario, String estadoCaja);
+    Optional<Cajas> findByUsuarioAndEstadoCaja(Usuario usuario, String estadoCaja);
 
-    Optional<Cajas> findByUsuario(Usuarios usuario);
+    Optional<Cajas> findByUsuario(Usuario usuario);
 
 }

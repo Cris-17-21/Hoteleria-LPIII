@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.CategoriasProductos;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Categoria;
 import com.alexander.sistema_cerro_verde_backend.repository.compras.CategoriasProductosRepository;
 import com.alexander.sistema_cerro_verde_backend.service.compras.ICategoriasProductosService;
 
@@ -23,21 +23,21 @@ public class CategoriasProductosService implements ICategoriasProductosService{
     private CategoriasProductosRepository repoCategoriasProductos;
 
     @Override
-    public List<CategoriasProductos> buscarTodos(){ //Buscar todas las categorias
+    public List<Categoria> buscarTodos(){ //Buscar todas las categorias
         return repoCategoriasProductos.findAll();
     }
 
     @Override
-    public List<CategoriasProductos> buscarActivos(){ //Buscar las categorias con estado = 1
+    public List<Categoria> buscarActivos(){ //Buscar las categorias con estado = 1
         return repoCategoriasProductos.findActive();
     }
 
     @Override
     @Transactional
-    public void guardar (CategoriasProductos categoriaproducto){ //Guardar categoria
-        Optional<CategoriasProductos> existente = repoCategoriasProductos.findByNombreIgnoreCase(categoriaproducto.getNombre());
+    public void guardar (Categoria categoriaproducto){ //Guardar categoria
+        Optional<Categoria> existente = repoCategoriasProductos.findByNombreIgnoreCase(categoriaproducto.getNombre());
         if(existente.isPresent()){
-            CategoriasProductos cp = existente.get();
+            Categoria cp = existente.get();
             if(cp.getEstado() == 0){
                 cp.setEstado(1);
                 cp.setNombre(categoriaproducto.getNombre());
@@ -52,12 +52,12 @@ public class CategoriasProductosService implements ICategoriasProductosService{
     }
 
     @Override
-    public void modificar(CategoriasProductos categoriaproducto){ //Modificar la categoria
+    public void modificar(Categoria categoriaproducto){ //Modificar la categoria
         repoCategoriasProductos.save(categoriaproducto);
     }
 
     @Override
-    public Optional<CategoriasProductos> buscarId(Integer id_categoria){ //Buscar por id la categoria
+    public Optional<Categoria> buscarId(Integer id_categoria){ //Buscar por id la categoria
         return repoCategoriasProductos.findById(id_categoria);
     }
 

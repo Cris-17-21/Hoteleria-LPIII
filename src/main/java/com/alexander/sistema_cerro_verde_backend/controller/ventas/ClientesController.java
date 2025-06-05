@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.Clientes;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.Cliente;
 import com.alexander.sistema_cerro_verde_backend.service.ventas.ApiCliente;
 import com.alexander.sistema_cerro_verde_backend.service.ventas.ClientesService;
 
@@ -34,28 +34,28 @@ public class ClientesController {
     private ApiCliente api;
 
     @GetMapping("/clientes")
-    public List<Clientes> buscarTodos() {
+    public List<Cliente> buscarTodos() {
         return serviceClientes.buscarTodos();
     }
 
     @GetMapping("/clientesactivos")
-    public List<Clientes> buscarActivos() {
+    public List<Cliente> buscarActivos() {
         return serviceClientes.buscarActivos();
     }
     
     @GetMapping("/clientes/{id}")
-    public Optional<Clientes> buscarPorId(@PathVariable("id") Integer id) {
+    public Optional<Cliente> buscarPorId(@PathVariable("id") Integer id) {
         return serviceClientes.buscarPorId(id);
     }
 
     @PostMapping("/clientes")
-    public Clientes guardar(@RequestBody Clientes cliente) {
+    public Cliente guardar(@RequestBody Cliente cliente) {
         serviceClientes.guardar(cliente);
         return cliente;
     }
 
     @PutMapping("/clientes")
-    public Clientes modificar(@RequestBody Clientes cliente) {
+    public Cliente modificar(@RequestBody Cliente cliente) {
         serviceClientes.modificar(cliente);
         return cliente;
     }

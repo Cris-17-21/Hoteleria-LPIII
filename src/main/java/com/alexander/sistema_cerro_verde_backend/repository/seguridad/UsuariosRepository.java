@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 @Repository
-public interface UsuariosRepository extends JpaRepository<Usuarios, Integer> {
-    public Usuarios findByUsername(String username);
-    public Optional<Usuarios> findByEmail(String email);
+public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
+    public Usuario findByUsername(String username);
+    public Optional<Usuario> findByEmail(String email);
     public boolean existsByEmail(String email);
     boolean existsByUsername(String username);
     @Query(value = "SELECT p.nombre_permiso " +

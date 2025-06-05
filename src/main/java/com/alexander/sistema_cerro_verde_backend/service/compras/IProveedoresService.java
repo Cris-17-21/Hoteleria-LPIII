@@ -3,19 +3,19 @@ package com.alexander.sistema_cerro_verde_backend.service.compras;
 import java.util.List;
 import java.util.Optional;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedores;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedor;
 
 public interface IProveedoresService {
 
-    List<Proveedores> buscarTodos(); //Listar proveedores
+    List<Proveedor> buscarTodos(); //Listar proveedores
 
-    List<Proveedores> buscarActivos(); //Listar proveedores activos
+    List<Proveedor> buscarActivos(); //Listar proveedores activos
 
-    void guardar(Proveedores proveedor); //Guardar proveedores
+    void guardar(Proveedor proveedor); //Guardar proveedores
 
-    void modificar(Proveedores proveedor); //Modificar proveedores
+    void modificar(Proveedor proveedor); //Modificar proveedores
 
-    Optional<Proveedores> buscarId(String ruc_proveedor); //Buscar proveedor por Ruc y estado = 1
+    Optional<Proveedor> buscarId(String ruc_proveedor); //Buscar proveedor por Ruc y estado = 1
 
     void eliminar(String ruc_proveedor); //Eliminar proveedor, pasa a estado = 0
 }

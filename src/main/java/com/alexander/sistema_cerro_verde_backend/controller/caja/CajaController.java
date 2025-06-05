@@ -8,11 +8,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.alexander.sistema_cerro_verde_backend.entity.caja.Cajas;
 import com.alexander.sistema_cerro_verde_backend.entity.caja.TransaccionesCaja;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 import com.alexander.sistema_cerro_verde_backend.repository.seguridad.UsuariosRepository;
 import com.alexander.sistema_cerro_verde_backend.service.caja.CajasService;
 import com.alexander.sistema_cerro_verde_backend.service.caja.TransaccionesCajaService;
@@ -31,7 +37,7 @@ public class CajaController {
     @Autowired
     private UsuariosRepository usuarioRepository;
 
-    private Usuarios getUsuarioAutenticado() {
+    private Usuario getUsuarioAutenticado() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         return usuarioRepository.findByUsername(username);
@@ -39,7 +45,7 @@ public class CajaController {
 
     @GetMapping
     public ResponseEntity<?> verificarEstadoCaja() {
-        Usuarios usuario = getUsuarioAutenticado();
+        Usuario usuario = getUsuarioAutenticado();
     
         Optional<Cajas> caja = serviceCaja.buscarCajaPorUsuario(usuario);
         
@@ -69,7 +75,7 @@ public class CajaController {
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerCajaPorId(@PathVariable Integer id) {
         Optional<Cajas> caja = serviceCaja.buscarId(id);
-        Usuarios usuario = getUsuarioAutenticado();
+        Usuario usuario = getUsuarioAutenticado();
 
         if (caja.isPresent() && caja.get().getUsuario().getIdUsuario().equals(usuario.getIdUsuario())) {
             return ResponseEntity.ok(caja.get());
@@ -80,7 +86,7 @@ public class CajaController {
 
     @PostMapping("/aperturar")
     public ResponseEntity<?> aperturarCaja(@RequestBody(required = false) Cajas cajaRequest) {
-        Usuarios usuario = getUsuarioAutenticado();
+        Usuario usuario = getUsuarioAutenticado();
         if (usuario == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -143,7 +149,7 @@ public class CajaController {
 
     @PostMapping("/cerrar")
     public ResponseEntity<?> cerrarCajaActual(@RequestBody Double montoCierre) {
-        Usuarios usuario = getUsuarioAutenticado();
+        Usuario usuario = getUsuarioAutenticado();
         Optional<Cajas> cajaAbierta = serviceCaja.buscarCajaAperturadaPorUsuario(usuario);
     
         if (cajaAbierta.isEmpty()) {
@@ -172,7 +178,7 @@ public class CajaController {
 
     @GetMapping("/admin/listar")
     public ResponseEntity<?> listarTodasLasCajas() {
-    Usuarios usuario = getUsuarioAutenticado();
+    Usuario usuario = getUsuarioAutenticado();
     
     if (!usuario.getRol().getNombreRol().equalsIgnoreCase("ADMIN")) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No autorizado");

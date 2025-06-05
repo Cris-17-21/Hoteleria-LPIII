@@ -1,16 +1,16 @@
 package com.alexander.sistema_cerro_verde_backend.service.seguridad;
 import java.util.List;
 
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 public interface IUsuariosService {
-    public Usuarios guardarUsuario(Usuarios usuario) throws Exception;
-    public Usuarios guardarUsuarioConPermisos(Usuarios usuario) throws Exception; 
-    public Usuarios obtenerUsuario(String username);
+    public Usuario guardarUsuario(Usuario usuario) throws Exception;
+    public Usuario guardarUsuarioConPermisos(Usuario usuario) throws Exception; 
+    public Usuario obtenerUsuario(String username);
     public void eliminarUsuario(Integer id);
-    public Usuarios actualizarUsuario( Usuarios usuarioActualizado) throws Exception;
-    public List<Usuarios> obtenerTodosUsuarios();
+    public Usuario actualizarUsuario( Usuario usuarioActualizado) throws Exception;
+    public List<Usuario> obtenerTodosUsuarios();
     public boolean existeUsuario(String username);
-    public Usuarios obtenerUsuarioPorId(Integer id) throws Exception;
+    public Usuario obtenerUsuarioPorId(Integer id) throws Exception;
     public List<String> obtenerPermisosPorUsuarioId(Integer id) throws Exception;
 
     

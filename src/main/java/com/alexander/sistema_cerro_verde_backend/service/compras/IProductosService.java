@@ -3,18 +3,18 @@ package com.alexander.sistema_cerro_verde_backend.service.compras;
 import java.util.List;
 import java.util.Optional;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.Productos;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Producto;
 
 public interface IProductosService {
-    List<Productos> buscarTodos(); //Buscar todos los Productos
+    List<Producto> buscarTodos(); //Buscar todos los Productos
  
-    List<Productos> buscarActivos(); //Buscas los productos activos, estado = 1
+    List<Producto> buscarActivos(); //Buscas los productos activos, estado = 1
 
-    void guardar(Productos producto); //Guardar producto
+    void guardar(Producto producto); //Guardar producto
 
-    void modificar(Productos producto); //Modificar producto
+    void modificar(Producto producto); //Modificar producto
 
-    Optional<Productos> buscarId(Integer id_producto); //Buscar el producto por Id
+    Optional<Producto> buscarId(Integer id_producto); //Buscar el producto por Id
 
     void eliminar(Integer id_producto); //Eliminar producto, estado = 0
 }

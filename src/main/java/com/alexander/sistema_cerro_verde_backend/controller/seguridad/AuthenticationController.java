@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alexander.sistema_cerro_verde_backend.config.JwtUtils;
 import com.alexander.sistema_cerro_verde_backend.entity.seguridad.JwtRequest;
 import com.alexander.sistema_cerro_verde_backend.entity.seguridad.JwtResponse;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 import com.alexander.sistema_cerro_verde_backend.excepciones.UsuarioDeshabilitadoException;
 import com.alexander.sistema_cerro_verde_backend.excepciones.UsuarioFoundException;
 import com.alexander.sistema_cerro_verde_backend.service.seguridad.UserDetailsServiceImpl;
@@ -69,8 +69,8 @@ public class AuthenticationController {
     
 
     @GetMapping("/usuario-actual")
-    public Usuarios  obtenerUsuarioActual(Principal principal){
+    public Usuario  obtenerUsuarioActual(Principal principal){
         System.out.println("Principal: " + principal);
-        return (Usuarios) this.userxDetailsServiceImpl.loadUserByUsername(principal.getName());
+        return (Usuario) this.userxDetailsServiceImpl.loadUserByUsername(principal.getName());
     }
 }

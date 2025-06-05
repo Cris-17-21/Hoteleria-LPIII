@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.Compras;
-import com.alexander.sistema_cerro_verde_backend.entity.compras.DetallesCompra;
-import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientosInventario;
-import com.alexander.sistema_cerro_verde_backend.entity.compras.Productos;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Compra;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.DetalleCompra;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.MovimientoInventario;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Producto;
 import com.alexander.sistema_cerro_verde_backend.repository.compras.ComprasRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.compras.DetallesCompraRepository;
 import com.alexander.sistema_cerro_verde_backend.repository.compras.MovimientosInventarioRepository;
@@ -35,20 +35,20 @@ public class ComprasService implements IComprasService {
     private MovimientosInventarioRepository repoMovimientosInventario;
 
     @Override
-    public List<Compras> buscarTodos() {
+    public List<Compra> buscarTodos() {
         return repoCompras.findAll();
     }
 
     @Override
-    public void guardar(Compras compra) {
+    public void guardar(Compra compra) {
         System.out.println("DETALLES: " + compra.getDetallecompra());
-        Compras compraGuardada = repoCompras.save(compra);
+        Compra compraGuardada = repoCompras.save(compra);
         // 2) Recorres cada detalle y ajustas el stock
         compraGuardada.getDetallecompra().forEach(det -> {
             Integer prodId = det.getProducto().getId_producto();
             var producto = repoProductos.findById(prodId)
                     .orElseThrow(() -> new EntityNotFoundException("Producto no existe: " + prodId));
-            MovimientosInventario movimiento = new MovimientosInventario();
+            MovimientoInventario movimiento = new MovimientoInventario();
             movimiento.setProducto(producto);
             movimiento.setTipo_movimiento("Entrada");
             movimiento.setFecha(compra.getFecha_compra());
@@ -68,14 +68,14 @@ public class ComprasService implements IComprasService {
 
     @Override
     @Transactional
-    public void modificar(Compras compra) {
+    public void modificar(Compra compra) {
         // 1) Carga la compra existente con sus detalles
-        Compras antigua = repoCompras.findById(compra.getId_compra())
+        Compra antigua = repoCompras.findById(compra.getId_compra())
                 .orElseThrow(() -> new EntityNotFoundException("Compra no encontrada"));
 
         // 2) Revertir en el stock el impacto de los detalles antiguos
-        for (DetallesCompra det : antigua.getDetallecompra()) {
-            Productos prod = repoProductos.findById(det.getProducto().getId_producto())
+        for (DetalleCompra det : antigua.getDetallecompra()) {
+            Producto prod = repoProductos.findById(det.getProducto().getId_producto())
                     .orElseThrow(() -> new EntityNotFoundException("Producto no existe"));
             int unidades = (int) (det.getCantidad() * prod.getUnidad().getEquivalencia());
             prod.setStock(prod.getStock() - unidades);
@@ -87,11 +87,11 @@ public class ComprasService implements IComprasService {
         repoCompras.save(compra);
 
         // 4) Ahora guarda la nueva compra + detalles (aprovechando cascade)
-        Compras guardada = repoCompras.save(compra);
+        Compra guardada = repoCompras.save(compra);
 
         // 5) Aplica en stock el impacto de los nuevos detalles
-        for (DetallesCompra det : guardada.getDetallecompra()) {
-            Productos prod = repoProductos.findById(det.getProducto().getId_producto())
+        for (DetalleCompra det : guardada.getDetallecompra()) {
+            Producto prod = repoProductos.findById(det.getProducto().getId_producto())
                     .orElseThrow(() -> new EntityNotFoundException("Producto no existe"));
             int unidades = (int) (det.getCantidad() * prod.getUnidad().getEquivalencia());
             prod.setStock(prod.getStock() + unidades);
@@ -100,7 +100,7 @@ public class ComprasService implements IComprasService {
     }
 
     @Override
-    public Optional<Compras> buscarId(Integer id_compra) {
+    public Optional<Compra> buscarId(Integer id_compra) {
         return repoCompras.findById(id_compra);
     }
 
@@ -112,7 +112,7 @@ public class ComprasService implements IComprasService {
     @Override
     public String obtenerProximoCorrelativo() {
         String ultimoCorrelativo = repoCompras.obtenerUltimaCompra()
-                .map(Compras::getCorrelativo)
+                .map(Compra::getCorrelativo)
                 .orElse("00000000");  // Si no hay registros
 
         // Convertir a número, sumar 1

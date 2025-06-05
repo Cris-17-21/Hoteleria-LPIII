@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alexander.sistema_cerro_verde_backend.entity.caja.Cajas;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 import com.alexander.sistema_cerro_verde_backend.repository.caja.CajasRepository;
 import com.alexander.sistema_cerro_verde_backend.service.caja.CajasService;
 
@@ -48,12 +48,12 @@ public class CajasServiceImpl implements CajasService {
     }
 
     @Override
-    public Optional<Cajas> buscarCajaAperturadaPorUsuario(Usuarios usuario) {
+    public Optional<Cajas> buscarCajaAperturadaPorUsuario(Usuario usuario) {
         return repository.findByUsuarioAndEstadoCaja(usuario, "abierta");
     }
 
     @Override
-    public Optional<Cajas> buscarCajaPorUsuario(Usuarios usuario) {
+    public Optional<Cajas> buscarCajaPorUsuario(Usuario usuario) {
         return repository.findByUsuario(usuario);
     }
 

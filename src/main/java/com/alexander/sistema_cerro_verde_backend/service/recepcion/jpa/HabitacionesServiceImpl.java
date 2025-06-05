@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alexander.sistema_cerro_verde_backend.entity.Sucursales;
+import com.alexander.sistema_cerro_verde_backend.entity.administrable.Sucursal;
 import com.alexander.sistema_cerro_verde_backend.entity.recepcion.Habitaciones;
 import com.alexander.sistema_cerro_verde_backend.entity.recepcion.TipoHabitacion;
 import com.alexander.sistema_cerro_verde_backend.repository.recepcion.HabitacionesRepository;
@@ -43,7 +43,7 @@ private TipoHabitacionService tipoHabitacionService;
     @Transactional
     public Habitaciones guardar(Habitaciones habitacion) {
     if (habitacion.getSucursal() != null && habitacion.getSucursal().getId() != null) {
-        Sucursales sucursal = sucursalService.buscarId(habitacion.getSucursal().getId()).orElse(null);
+        Sucursal sucursal = sucursalService.buscarId(habitacion.getSucursal().getId()).orElse(null);
         habitacion.setSucursal(sucursal);
     }
         

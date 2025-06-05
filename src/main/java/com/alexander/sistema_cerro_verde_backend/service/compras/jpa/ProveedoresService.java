@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedores;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedor;
 import com.alexander.sistema_cerro_verde_backend.repository.compras.ProveedoresRepository;
 import com.alexander.sistema_cerro_verde_backend.service.compras.IProveedoresService;
 
@@ -23,21 +23,21 @@ public class ProveedoresService implements IProveedoresService {
     private ProveedoresRepository repoProveedores;
 
     @Override
-    public List<Proveedores> buscarTodos() { //Buscar todos los proveedores
+    public List<Proveedor> buscarTodos() { //Buscar todos los proveedores
         return repoProveedores.findAll();
     }
 
     @Override
-    public List<Proveedores> buscarActivos() { //Buscar los proveedores activos
+    public List<Proveedor> buscarActivos() { //Buscar los proveedores activos
         return repoProveedores.findActive();
     }
 
     @Override
     @Transactional
-    public void guardar(Proveedores proveedor) {
-        Optional<Proveedores> existente = repoProveedores.findByRucIncludingInactives(proveedor.getRuc_proveedor());
+    public void guardar(Proveedor proveedor) {
+        Optional<Proveedor> existente = repoProveedores.findByRucIncludingInactives(proveedor.getRuc_proveedor());
         if (existente.isPresent()) {
-            Proveedores prov = existente.get();
+            Proveedor prov = existente.get();
             if (prov.getEstado() == 0) {
                 prov.setEstado(1);
                 prov.setRazon_social(proveedor.getRazon_social());
@@ -53,12 +53,12 @@ public class ProveedoresService implements IProveedoresService {
     }
 
     @Override
-    public void modificar(Proveedores proveedor) {
+    public void modificar(Proveedor proveedor) {
         repoProveedores.save(proveedor);
     }
 
     @Override
-    public Optional<Proveedores> buscarId(String ruc_proveedor) {
+    public Optional<Proveedor> buscarId(String ruc_proveedor) {
         return repoProveedores.findById(ruc_proveedor);
     }
 

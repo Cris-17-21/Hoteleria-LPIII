@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.MetodosPago;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.MetodoPago;
 import com.alexander.sistema_cerro_verde_backend.repository.ventas.MetodoPagoRepository;
 import com.alexander.sistema_cerro_verde_backend.service.ventas.IMetodoPagoService;
 
@@ -17,27 +17,27 @@ public class MetodoPagoService implements IMetodoPagoService {
     private MetodoPagoRepository repoMetodo;
 
     @Override
-    public List<MetodosPago> buscarTodos() { //Listar todos los métodos de pago
+    public List<MetodoPago> buscarTodos() { //Listar todos los métodos de pago
         return repoMetodo.findAll();
     }
 
     @Override
-    public List<MetodosPago> buscarActivos() { //Listar los métodos de pago activos
+    public List<MetodoPago> buscarActivos() { //Listar los métodos de pago activos
         return repoMetodo.findActive();
     }
 
     @Override
-    public Optional<MetodosPago> buscarPorId(Integer id) { //Buscar método de pago por el ID
+    public Optional<MetodoPago> buscarPorId(Integer id) { //Buscar método de pago por el ID
         return repoMetodo.findById(id);
     }
 
     @Override
-    public void registrar(MetodosPago metodo) { //Registrar método de pago
+    public void registrar(MetodoPago metodo) { //Registrar método de pago
         repoMetodo.save(metodo);
     }
 
     @Override
-    public void modificar(MetodosPago metodo) { //Modificar el método de pago
+    public void modificar(MetodoPago metodo) { //Modificar el método de pago
         repoMetodo.save(metodo);
     }
 

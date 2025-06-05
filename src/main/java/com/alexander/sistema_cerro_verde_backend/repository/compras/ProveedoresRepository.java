@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedores;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedor;
 
-public interface ProveedoresRepository extends JpaRepository<Proveedores, String> {
+public interface ProveedoresRepository extends JpaRepository<Proveedor, String> {
     @Query("SELECT p FROM Proveedores p WHERE p.estado = 1")
-    List<Proveedores> findActive();
+    List<Proveedor> findActive();
 
     @Query("SELECT p FROM Proveedores p WHERE p.ruc_proveedor = :ruc")
-    Optional<Proveedores> findByRucIncludingInactives(@Param("ruc") String ruc);
+    Optional<Proveedor> findByRucIncludingInactives(@Param("ruc") String ruc);
 }

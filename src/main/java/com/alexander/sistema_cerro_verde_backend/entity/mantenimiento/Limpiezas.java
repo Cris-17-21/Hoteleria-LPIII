@@ -1,5 +1,11 @@
 package com.alexander.sistema_cerro_verde_backend.entity.mantenimiento;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import com.alexander.sistema_cerro_verde_backend.entity.recepcion.Habitaciones;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,11 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-
-import com.alexander.sistema_cerro_verde_backend.entity.recepcion.Habitaciones;
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
 
 @Entity
 @Table(name = "limpiezas")
@@ -27,7 +28,7 @@ public class Limpiezas {
 
     @ManyToOne
     @JoinColumn(name ="id_usuario")
-    private Usuarios usuario;
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_habitacion")
@@ -45,10 +46,10 @@ public class Limpiezas {
     public void setId_limpieza(Integer id_limpieza) {
         this.id_limpieza = id_limpieza;
     }
-    public Usuarios getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
-    public void setUsuario(Usuarios usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
     public String getFecha_hora_limpieza() {

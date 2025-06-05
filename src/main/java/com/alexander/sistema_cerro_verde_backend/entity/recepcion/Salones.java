@@ -2,7 +2,7 @@ package com.alexander.sistema_cerro_verde_backend.entity.recepcion;
 
 import java.util.List;
 
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaSalon;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.VentaXSalon;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -28,7 +28,7 @@ public class Salones {
     //Relación de Uno a Muchos con VentaSalon
     @OneToMany(mappedBy="salon", cascade=CascadeType.ALL)
     @JsonIgnore
-    private List<VentaSalon> ventaSalon;
+    private List<VentaXSalon> ventaSalon;
 
     public Integer getId_salon() {
         return id_salon;
@@ -67,11 +67,11 @@ public class Salones {
         this.estado = estado;
     }
 
-    public List<VentaSalon> getVentaSalon() {
+    public List<VentaXSalon> getVentaSalon() {
         return ventaSalon;
     }
 
-    public void setVentaSalon(List<VentaSalon> ventaSalon) {
+    public void setVentaSalon(List<VentaXSalon> ventaSalon) {
         this.ventaSalon = ventaSalon;
     }
 

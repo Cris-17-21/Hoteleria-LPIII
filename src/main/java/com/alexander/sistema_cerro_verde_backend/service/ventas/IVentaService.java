@@ -3,17 +3,17 @@ package com.alexander.sistema_cerro_verde_backend.service.ventas;
 import java.util.List;
 import java.util.Optional;
 
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.Ventas;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.Venta;
 
 public interface IVentaService {
 
-    List<Ventas> buscarTodos (); //Listar todas las ventas
+    List<Venta> buscarTodos (); //Listar todas las ventas
     
-    Optional<Ventas> buscarPorId (Integer id); //Buscar venta por ID
+    Optional<Venta> buscarPorId (Integer id); //Buscar venta por ID
 
-    void guardar (Ventas venta); //Guardar venta
+    void guardar (Venta venta); //Guardar venta
 
-    void modificar (Ventas venta); //Modificar venta
+    void modificar (Venta venta); //Modificar venta
 
     void eliminar (Integer id); //Eliminar venta
 

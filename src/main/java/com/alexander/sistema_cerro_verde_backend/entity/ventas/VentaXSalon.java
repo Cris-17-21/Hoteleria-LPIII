@@ -1,7 +1,10 @@
 package com.alexander.sistema_cerro_verde_backend.entity.ventas;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+
 import com.alexander.sistema_cerro_verde_backend.entity.recepcion.Salones;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,24 +15,28 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="venta_salon")
-public class VentaSalon {
+@Table(name = "ventas_x_salones")
+@SQLDelete(sql = "UPDATE ventas_x_salones SET estado = 0 WHERE id_venta_salon = ?")
+@SQLRestriction("estado = 1")
+public class VentaXSalon {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idVentaSalon;
     private Integer horas;
     private Integer dias;
     private Integer subTotal;
+    private Integer estado = 1;
 
     //Relación de Muchos a Uno con Venta
     @ManyToOne
     @JoinColumn(name="id_venta")
-    @JsonBackReference(value="venta")
-    private Ventas venta;
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Venta venta;
 
-    //Relación de Mucho a Uno con Salones
+    //Relación de Muchos a Uno con Salones
     @ManyToOne
     @JoinColumn(name="id_salon")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Salones salon;
 
     public Integer getIdVentaSalon() {
@@ -56,11 +63,27 @@ public class VentaSalon {
         this.dias = dias;
     }
 
-    public Ventas getVenta() {
+    public Integer getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(Integer subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
+    public Venta getVenta() {
         return venta;
     }
 
-    public void setVenta(Ventas venta) {
+    public void setVenta(Venta venta) {
         this.venta = venta;
     }
 
@@ -72,11 +95,9 @@ public class VentaSalon {
         this.salon = salon;
     }
 
-    public Integer getSubTotal() {
-        return subTotal;
-    }
-
-    public void setSubTotal(Integer subTotal) {
-        this.subTotal = subTotal;
+    @Override
+    public String toString() {
+        return "VentaXSalon [idVentaSalon=" + idVentaSalon + ", horas=" + horas + ", dias=" + dias + ", subTotal="
+                + subTotal + ", estado=" + estado + ", venta=" + venta + ", salon=" + salon + "]";
     }
 }

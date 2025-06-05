@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexander.sistema_cerro_verde_backend.entity.ventas.MetodosPago;
+import com.alexander.sistema_cerro_verde_backend.entity.ventas.MetodoPago;
 import com.alexander.sistema_cerro_verde_backend.service.ventas.IMetodoPagoService;
 
 @RestController
@@ -30,28 +30,28 @@ public class MetodoPagoController {
     private IMetodoPagoService metodoService;
 
     @GetMapping("/metodopago")
-    public List<MetodosPago> buscarTodos() { //Listar todos los métodos de pago
+    public List<MetodoPago> buscarTodos() { //Listar todos los métodos de pago
         return metodoService.buscarTodos();
     }
 
     @GetMapping("/metodopagoactivo")
-    public List<MetodosPago> buscarActivos() { //Listar los métodos de pago activos
+    public List<MetodoPago> buscarActivos() { //Listar los métodos de pago activos
         return metodoService.buscarActivos();
     }
 
     @GetMapping("/metodopago/{id}")
-    public Optional<MetodosPago> buscarPorId(@PathVariable Integer id) { //Buscar método de pago por el ID
+    public Optional<MetodoPago> buscarPorId(@PathVariable Integer id) { //Buscar método de pago por el ID
         return metodoService.buscarPorId(id);
     }
 
     @PostMapping("/metodopago")
-    public MetodosPago registrar(@RequestBody MetodosPago metodo) { //Registrar método de pago
+    public MetodoPago registrar(@RequestBody MetodoPago metodo) { //Registrar método de pago
         metodoService.registrar(metodo);
         return metodo;
     }
 
     @PutMapping("/metodopago")
-    public MetodosPago modificar(@RequestBody MetodosPago metodo) { //Modificar el método de pago
+    public MetodoPago modificar(@RequestBody MetodoPago metodo) { //Modificar el método de pago
         metodoService.registrar(metodo);
         return metodo;
     }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuarios;
+import com.alexander.sistema_cerro_verde_backend.entity.seguridad.Usuario;
 import com.alexander.sistema_cerro_verde_backend.excepciones.CorreoYaRegistradoException;
 import com.alexander.sistema_cerro_verde_backend.excepciones.UsuarioYaRegistradoException;
 import com.alexander.sistema_cerro_verde_backend.service.seguridad.IUsuariosService;
@@ -38,33 +38,33 @@ public class UsuarioController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/")
-    public List<Usuarios> listarUsuarios(){
+    public List<Usuario> listarUsuarios(){
         return usuarioServiceImpl.obtenerTodosUsuarios();
     }
 
     @PostMapping("/")
-    public Usuarios guardUsuario(@RequestBody Usuarios usuario) throws Exception {
+    public Usuario guardUsuario(@RequestBody Usuario usuario) throws Exception {
         usuario.setPassword(this.bCryptPasswordEncoder.encode(usuario.getPassword()));
         return usuarioService.guardarUsuario(usuario);
     }
     
     @GetMapping("/{usuarioId}")
-    public Usuarios obtenerUsuarioPorId(@PathVariable("usuarioId") Integer usuarioId) throws Exception {
+    public Usuario obtenerUsuarioPorId(@PathVariable("usuarioId") Integer usuarioId) throws Exception {
         return usuarioServiceImpl.obtenerUsuarioPorId(usuarioId);
     }
 
     @GetMapping("/username/{usuario}")
-    public Usuarios obtenerUsuario(@PathVariable("usuario") String usuario) {
+    public Usuario obtenerUsuario(@PathVariable("usuario") String usuario) {
         return usuarioServiceImpl.obtenerUsuario(usuario);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editarUsuario(@PathVariable Integer id, @RequestBody Usuarios usuario) {
+    public ResponseEntity<?> editarUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
         try {
             // Establecer el ID que viene por la URL al objeto usuario
             usuario.setIdUsuario(id);
 
-            Usuarios usuarioActualizado = usuarioServiceImpl.actualizarUsuario(usuario);
+            Usuario usuarioActualizado = usuarioServiceImpl.actualizarUsuario(usuario);
             return ResponseEntity.ok(usuarioActualizado);
 
         } catch (CorreoYaRegistradoException e) {
@@ -96,10 +96,10 @@ public class UsuarioController {
     @PutMapping("/{id}/cambiar-password")
     public ResponseEntity<?> cambiarPassword(@PathVariable Integer id, @RequestBody String nuevaPassword) {
         try {
-            Optional<Usuarios> optional = usuarioServiceImpl.getUsuariosRepository().findById(id);
+            Optional<Usuario> optional = usuarioServiceImpl.getUsuariosRepository().findById(id);
     
             if (optional.isPresent()) {
-                Usuarios usuario = optional.get();
+                Usuario usuario = optional.get();
                 // Si estás recibiendo con comillas, límpialo
                 String passwordEncriptada = bCryptPasswordEncoder.encode(nuevaPassword.replace("\"", ""));
                 usuario.setPassword(passwordEncriptada);

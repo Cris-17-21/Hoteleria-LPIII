@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedores;
+import com.alexander.sistema_cerro_verde_backend.entity.compras.Proveedor;
 import com.alexander.sistema_cerro_verde_backend.service.compras.ApiService;
 import com.alexander.sistema_cerro_verde_backend.service.compras.jpa.ProveedoresService;
 
@@ -33,27 +33,27 @@ public class ProveedoresController {
     private ApiService api;
 
     @GetMapping("/proveedores")
-    public List<Proveedores> buscarTodos() { //Listar todos los proveedores
+    public List<Proveedor> buscarTodos() { //Listar todos los proveedores
         return serviceProveedores.buscarTodos(); 
     }
 
     @GetMapping("/proveedoresActivos")
-    public List<Proveedores> buscarActivos() {
+    public List<Proveedor> buscarActivos() {
         return serviceProveedores.buscarActivos();
     }
 
     @PostMapping("/proveedores")
-    public Proveedores guardar(@RequestBody Proveedores proveedor) {
+    public Proveedor guardar(@RequestBody Proveedor proveedor) {
         serviceProveedores.guardar(proveedor);
         return proveedor;
     }
     @PutMapping("/proveedores")
-    public Proveedores modificar(@RequestBody Proveedores proveedor) {
+    public Proveedor modificar(@RequestBody Proveedor proveedor) {
         serviceProveedores.modificar(proveedor);
         return proveedor;
     }
     @GetMapping("/proveedores/{id}")
-    public Optional<Proveedores> buscarId(@PathVariable("id") String ruc_proveedor) {
+    public Optional<Proveedor> buscarId(@PathVariable("id") String ruc_proveedor) {
         return serviceProveedores.buscarId(ruc_proveedor);
     }
     @DeleteMapping("/proveedores/{id}")

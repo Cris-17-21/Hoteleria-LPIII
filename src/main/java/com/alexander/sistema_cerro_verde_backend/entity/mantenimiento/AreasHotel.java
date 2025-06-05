@@ -1,5 +1,12 @@
 package com.alexander.sistema_cerro_verde_backend.entity.mantenimiento;
 
+import java.util.List;
+
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import com.alexander.sistema_cerro_verde_backend.entity.administrable.Sucursal;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,13 +15,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
-import java.util.List;
-
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-
-import com.alexander.sistema_cerro_verde_backend.entity.Sucursales;
 
 @Entity
 @Table(name = "areas_hotel")
@@ -32,7 +32,7 @@ public class AreasHotel {
 
     @ManyToOne
     @JoinColumn(name = "id_sucursal")
-    private Sucursales sucursal;
+    private Sucursal sucursal;
     
     public Integer getId_area() {
         return id_area;
@@ -62,10 +62,10 @@ public class AreasHotel {
     public void setIncidencias(List<Incidencias> incidencias) {
         this.incidencias = incidencias;
     }
-    public Sucursales getSucursal() {
+    public Sucursal getSucursal() {
         return sucursal;
     }
-    public void setSucursal(Sucursales sucursal) {
+    public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
     }
     
